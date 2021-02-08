@@ -46,10 +46,11 @@ function MyUrlParser(el, data) {
             this.resultsTable.innerHTML = "";
             const data = new FormData(this.form);
             data.forEach((v, key) => {
-                this.resultsTable.insertAdjacentHTML(
-                    "beforeend",
-                    new ResultField(this.parseUrlString(v), v, key).build()
-                );
+                if (v.length)
+                    this.resultsTable.insertAdjacentHTML(
+                        "beforeend",
+                        new ResultField(this.parseUrlString(v), v, key).build()
+                    );
             });
         };
     };
@@ -79,8 +80,8 @@ function MyUrlParser(el, data) {
                 result.direct.value = "Website";
             } else if (splitedUrl[0] === "vnedrenie-crm") {
                 result.direct.value = "Crm";
-            } else {
-                result.direct.value = "Unknown";
+            } else if (splitedUrl[0].length) {
+                result.direct.value = "Unknown - " + splitedUrl[0];
             }
 
             if (splitedUrl.length >= 2) {
@@ -140,7 +141,13 @@ function ResultField(result, inputVal, name) {
     this.result = result;
     this.inputName = name;
     this.inputValue = inputVal;
-    this.noParserResult = "Извините, но я умею парсить урл начинающиеся только с \"https://itrack.ru/portfolio/\". По данному запросу у меня ничего нет."
+    this.noParserResult = `
+    <div class="result-item">
+        <div class="bad">
+            Извините, но я умею парсить только урл типа \"https://itrack.ru/portfolio/DATA/TO/PARSE\". По данному запросу у меня ничего нет.
+        </div>
+    </div>
+    `;
     this.html = (content) => `
     <div class="result-field">
         <div class="result-header">Данные по запрошеному url --- \"${this.inputValue}\" ---</div>
@@ -161,7 +168,9 @@ function ResultField(result, inputVal, name) {
         Object.keys(this.result).forEach((key) => {
             params += this.param(this.result[key].name, this.result[key].value);
         });
-        return params.length > 0 ? this.html(params) : this.html();
+        return params.length > 0
+            ? this.html(params)
+            : this.html(this.noParserResult);
     };
 
     return this;
