@@ -1,0 +1,8 @@
+.popup_open {
+    cursor: pointer;
+    background: #c3c3c3;
+    border-radius: 4px;
+    padding: 5px 10px;
+    border: 0;
+    display: inline-block;
+}

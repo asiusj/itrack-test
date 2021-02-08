@@ -1,0 +1,124 @@
+html,
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.container-fluid {
+    padding: 0 24px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.submit-button,
+.add-item-button {
+    border: none;
+    border-radius: 3px;
+    padding: 0.5em;
+    font-size: 18px;
+}
+
+.add-item-button {
+    margin-right: 0.5em;
+}
+
+h3 {
+    margin: 0;
+    padding: 1.3em;
+    background-color: #efefef;
+    transition: background-color 1.4s;
+}
+h3:hover,
+.data-form button:hover,
+.remove-input-field:hover,
+.add-item-button:hover {
+    background-color: #d4eeff;
+}
+
+.form-inputs,
+.data-form {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1em 0 0;
+}
+
+.input-text-field {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 0 0.25em;
+}
+
+.data-form input {
+    display: inline-block;
+    width: 89%;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    padding: 0.3em 0;
+    margin-right: 1%;
+}
+
+.remove-input-field {
+    width: 10%;
+    max-width: 100px;
+    text-align: center;
+    padding: 0.3em 0;
+    background-color: #efefef;
+    transition: background-color 1.4s;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.data-form button,
+.add-item-button {
+    cursor: pointer;
+    background-color: #efefef;
+    transition: background-color 1.4s;
+    border-radius: 4px;
+}
+
+.results-table {
+    margin: 0.5em 0;
+}
+
+.result-field {
+    display: flex;
+    flex-wrap: wrap;
+}
+.result-header {
+    width: 100%;
+    padding: 0.5em 2em;
+    background-color: #efefef;
+}
+.result-item {
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid transparent;
+    background-color: #fff;
+    transition: border-bottom-color, background-color 0.4s;
+}
+
+.result-item:hover {
+    border-bottom: 1px solid rgb(114, 114, 114);
+    background-color: #d4eeff;
+}
+
+.result-item div {
+    width: 50%;
+    padding: 0.5em;
+}
+.result-item div:first-child {
+    border-right: 1px solid rgb(114, 114, 114);
+}

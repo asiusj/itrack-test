@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Parser</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row justify-center">
+                <div class="col-6">
+                    <h3>MyUrlParser</h3>
+                    <div id="data-sheet"></div>
+                </div>
+            </div>
+        </div>
+        <script src="parser.js"></script>
+        <script>
+            function createSheet() {
+                const initialData = {
+                    0: "https://itrack.ru/portfolio/website/",
+                    1: "https://itrack.ru/portfolio/vnedrenie-crm/",
+                    2: "https://itrack.ru/portfolio/website/filter/project_type-is-korporativnyy_sayt/apply/",
+                    3: "https://itrack.ru/portfolio/vnedrenie-crm/filter/crm_project_type-is-amocrm/apply/",
+                    4: "https://itrack.ru/portfolio/website/?PAGEN_1=2",
+                    5: "https://itrack.ru/portfolio/vnedrenie-crm/?PAGEN_1=2",
+                    6: "https://itrack.ru/portfolio/vnedrenie-crm/mobifitness/",
+                    7: "https://itrack.ru/portfolio/website/miratorg/",
+                };
+                const dataSheetElement = document.getElementById("data-sheet");
+                const sheetEngine = new MyUrlParser(
+                    dataSheetElement,
+                    initialData
+                ).build();
+            }
+
+            createSheet();
+        </script>
+    </body>
+</html>

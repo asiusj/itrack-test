@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Slider</title>
+    </head>
+    <body>
+        <div id="target-1">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor,
+            culpa distinctio. Tempora repellendus nihil obcaecati, corrupti
+            magnam ipsa omnis possimus aut vero architecto dolor nostrum ratione
+            aperiam eligendi dolores id.
+        </div>
+
+        <div id="slider-1" class="slider"></div>
+
+        <div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor,
+            culpa distinctio. Tempora repellendus nihil obcaecati, corrupti
+            magnam ipsa omnis possimus aut vero architecto dolor nostrum ratione
+            aperiam eligendi dolores id.
+            <div id="target-2" style="font-size: 24px">I'm target-2!</div>
+        </div>
+
+        <div>
+            <button id="unsub-button">Unsubscribe for target 2</button>
+        </div>
+        <script src="slider.js"></script>
+        <script>
+            const slider1 = new Slider(
+                document.getElementById("slider-1"),
+                8,
+                48,
+                14
+            ).build();
+
+            function anySideLogic() {
+                const target1 = document.getElementById("target-1");
+                const observer = slider1.getValueChanges().subscribe((val) => {
+                    target1.style.fontSize = val + "px";
+                });
+            }
+            anySideLogic();
+            anyOtherSideLogic();
+
+            function anyOtherSideLogic() {
+                const target2 = document.getElementById("target-2");
+                const currentVal = slider1
+                    .getValueChanges()
+                    .subscribe((current) => {
+                        target2.innerText = `I'm target-2! And now my value is ${current}`;
+                    });
+                const button = document.getElementById("unsub-button");
+                button.addEventListener(
+                    "click",
+                    () => {
+                        try {
+                            currentVal.unsubscribe();
+                            console.log("Target-2 was unsubscribed");
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    },
+                    { once: true }
+                );
+                button.onclick = function () {
+                    unsub(currentVal);
+                };
+            }
+
+            function unsub(subject) {
+                if (
+                    subject.unsubscribe &&
+                    subject.unsubscribe.prototype === Function
+                ) {
+                    subject.unsubscribe();
+                }
+            }
+        </script>
+    </body>
+</html>
