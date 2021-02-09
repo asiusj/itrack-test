@@ -96,7 +96,7 @@ function MyUrlParser(el, data) {
                         i++;
                     }
                     result.filterParam.value = filterString;
-                } else if (splitedUrl[1].match(/\?PAGEN_[d]+\=[d]*/)) {
+                } else if (splitedUrl[1].match(/PAGEN/)) {
                     result.type.value = "NextPage";
                 } else if (splitedUrl[1].length && splitedUrl.length === 3) {
                     result.type.value = "Project";
