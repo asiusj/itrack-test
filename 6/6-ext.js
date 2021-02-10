@@ -61,25 +61,30 @@ const counter = new ProtoExtentds();
 counter.go();
 
 class Entity2D {
-    mass = 1;
-    constructor(x = 0, y = 0, m = Entity2D.mass) {
+    #mass = 1;
+    constructor(x = 0, y = 0, m) {
         this.x = x;
         this.y = y;
-        this.mass = m;
+        this.Mass = m || this.Mass;
     }
 
     pos = function () {
         console.log("X: ", this.x, "\nY: ", this.y);
     };
 
-    mass() {
-        return this.mass;
+    get Mass() {
+        return this.#mass;
+    }
+
+    set Mass(val) {
+        console.log(this);
+        if (this instanceof Entity2D) this.#mass = val;
+        else return;
     }
 }
 
 class Entity3D extends Entity2D {
-    mass = 3;
-    constructor(x = 0, y = 0, z = 0, m = Entity3D.mass) {
+    constructor(x = 0, y = 0, z = 0, m = 5) {
         super(x, y, m);
         this.z = z;
     }
@@ -91,3 +96,6 @@ class Entity3D extends Entity2D {
 
 const cat2d = new Entity2D(10, 10, 3);
 const dog3d = new Entity3D(0, 0, 100);
+
+// dog3d.Mass = 22;
+console.log(dog3d.Mass);
